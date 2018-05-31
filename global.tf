@@ -18,7 +18,7 @@ resource "google_compute_firewall" "ssh" {
     ports    = ["22", "80", "443"]
   }
 
-   source_ranges = ["0.0.0.0/0"]
+  source_ranges = ["0.0.0.0/0"]
 }
 
 # Creates a new DNS zone
@@ -40,20 +40,19 @@ resource "google_compute_subnetwork" "shippy-freight" {
 # Attaches new cluster to our network and our subnet,
 # Ensures at least one instance is running
 resource "google_container_cluster" "shippy-freight-cluster" {
-  name = "shippy-freight-cluster"
-  network = "${google_compute_network.shippy-network.name}"
+  name       = "shippy-freight-cluster"
+  network    = "${google_compute_network.shippy-network.name}"
   subnetwork = "${google_compute_subnetwork.shippy-freight.name}"
-  zone = "${var.gcloud-zone}"
+  zone       = "${var.gcloud-zone}"
 
   initial_node_count = 1
 
   master_auth {
-    username = <redacted>
-    password = <redacted>
+    username = "camiecreator@gmail.com"
+    password = "getAwayFromMeYouNastyDOG21"
   }
 
   node_config {
-
     # Defines the type/size instance to use
     # Standard is a sensible starting point
     machine_type = "n1-standard-1"
@@ -65,16 +64,16 @@ resource "google_container_cluster" "shippy-freight-cluster" {
       "https://www.googleapis.com/auth/monitoring",
       "https://www.googleapis.com/auth/logging.write",
       "https://www.googleapis.com/auth/compute",
-      "https://www.googleapis.com/auth/cloud-platform"
+      "https://www.googleapis.com/auth/cloud-platform",
     ]
   }
 }
 
 # Creates a new DNS range for cluster
 resource "google_dns_record_set" "dev-k8s-endpoint-shippy-freight" {
-  name  = "k8s.dev.${google_dns_managed_zone.shippy-freight.dns_name}"
-  type  = "A"
-  ttl   = 300
+  name = "k8s.dev.${google_dns_managed_zone.shippy-freight.dns_name}"
+  type = "A"
+  ttl  = 300
 
   managed_zone = "${google_dns_managed_zone.shippy-freight.name}"
 

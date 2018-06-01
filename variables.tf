@@ -1,13 +1,13 @@
 variable "gcloud-region" {
-  default = "europe-west2"
+  default = "us-west1"
 }
 
 variable "gcloud-zone" {
-  default = "europe-west2-a"
+  default = "us-west1-a"
 }
 
 variable "gcloud-project" {
-  default = "shippy-freight"
+  default = "shippy-freight-205815"
 }
 
 variable "platform-name" {

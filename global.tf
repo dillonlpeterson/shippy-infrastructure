@@ -48,7 +48,7 @@ resource "google_container_cluster" "shippy-freight-cluster" {
   initial_node_count = 1
 
   master_auth {
-    username = "camiecreator@gmail.com"
+    username = "camiecreator"
     password = "getAwayFromMeYouNastyDOG21"
   }
 
